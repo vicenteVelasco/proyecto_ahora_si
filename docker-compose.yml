@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+      POSTGRES_DB: liceo_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      # FastAPI se conectará al contenedor "db" en lugar de "localhost"
+      - DATABASE_URL=postgresql://admin:adminpassword@db:5432/liceo_db
+      - SECRET_KEY=tu_clave_secreta_jwt
+    depends_on:
+      - db
+
+  frontend:
+    build: ./flonten_clablon_biacho
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

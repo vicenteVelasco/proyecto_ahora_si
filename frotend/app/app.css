@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-vinotinto: #7a1b2c;
+  --color-vinotinto-oscuro: #4a0f1b;
+  --color-vinotinto-claro: #a33a4c;
+  --color-vinotinto-suave: #f5e6e8;
+  --color-dorado: #c9a227;
+  --color-dorado-suave: #f3e9c9;
+  --color-carbon: #2b1e1f;
+  --color-piedra: #6b5d59;
+  --color-piedra-clara: #e7e2df;
+
+  --font-titulo: "Fraunces", serif;
+  --font-texto: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-texto);
+  color: var(--color-carbon);
+}
+
+/* Transicion entre paginas (usada por el prop viewTransition de React Router) */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 240ms;
+    animation-timing-function: ease-in-out;
+  }
+
+  /* Desplazamiento suave para los enlaces ancla del navbar (#historia, #niveles, etc.) */
+  html {
+    scroll-behavior: smooth;
+  }
+}
